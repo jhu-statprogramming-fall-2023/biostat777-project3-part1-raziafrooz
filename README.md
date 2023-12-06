@@ -1,10 +1,19 @@
 
+<!-- pkgdown markup -->
+
+<a href="https://CRAN.R-project.org/web/checks/check_results_matrixStats.html"><img src="https://www.r-pkg.org/badges/version/matrixStats" alt="CRAN check status" border="0"/></a>
+<a href="https://github.com/HenrikBengtsson/matrixStats/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/HenrikBengtsson/matrixStats/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status" border="0"/></a>
+<a href="https://ci.appveyor.com/project/HenrikBengtsson/matrixstats"><img src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/matrixStats?svg=true" alt="Build status" border="0"/></a>
+<a href="https://app.codecov.io/gh/HenrikBengtsson/matrixStats"><img src="https://codecov.io/gh/HenrikBengtsson/matrixStats/branch/develop/graph/badge.svg" alt="Coverage Status" border="0"/></a>
+<a href="https://github.com/rstats-gsoc/gsoc2015/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2015-blue" alt="A Google Summer of Code 2015 project" border="0"/></a>
+<a href="https://github.com/rstats-gsoc/gsoc2021/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2021-blue" alt="A Google Summer of Code 2021 project" border="0"/></a>
+
+
 # matrixStats: Functions that Apply to Rows and Columns of Matrices (and to Vectors)
 
 I used matrixStats package from this GitHub
 <https://github.com/HenrikBengtsson/matrixStats> The website I created
-for this package can be found here
-//jhu-statprogramming-fall-2023.github.io/biostat777-project3-part1-raziafrooz/
+for this package can be found here https://jhu-statprogramming-fall-2023.github.io/biostat777-project3-part1-raziafrooz/
 
 Include a description of the 5 things you customized in your pkgdown
 website (excluding adding the example data analysis from Part 1C).
@@ -21,15 +30,22 @@ website (excluding adding the example data analysis from Part 1C).
 
 6.  code_font: {google: "JetBrains Mono"}
 
+# Authors of the main package:
 
-<!-- pkgdown markup -->
-
-<a href="https://CRAN.R-project.org/web/checks/check_results_matrixStats.html"><img src="https://www.r-pkg.org/badges/version/matrixStats" alt="CRAN check status" border="0"/></a>
-<a href="https://github.com/HenrikBengtsson/matrixStats/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/HenrikBengtsson/matrixStats/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status" border="0"/></a>
-<a href="https://ci.appveyor.com/project/HenrikBengtsson/matrixstats"><img src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/matrixStats?svg=true" alt="Build status" border="0"/></a>
-<a href="https://app.codecov.io/gh/HenrikBengtsson/matrixStats"><img src="https://codecov.io/gh/HenrikBengtsson/matrixStats/branch/develop/graph/badge.svg" alt="Coverage Status" border="0"/></a>
-<a href="https://github.com/rstats-gsoc/gsoc2015/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2015-blue" alt="A Google Summer of Code 2015 project" border="0"/></a>
-<a href="https://github.com/rstats-gsoc/gsoc2021/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2021-blue" alt="A Google Summer of Code 2021 project" border="0"/></a>
+Henrik Bengtsson (aut", "cre", "cph"),
+Constantin Ahlmann-Eltze ("ctb"),
+Hector Corrada Bravo ("ctb"),
+Robert Gentleman ("ctb"),
+Jan Gleixner ("ctb"),
+Peter Hickey ("ctb"),
+Ola Hossjer ("ctb"),
+Harris Jaffee ("ctb"),
+Dongcan Jiang ("ctb"),
+Peter Langfelder ("ctb"),
+Brian Montgomery ("ctb"),
+Angelina Panagopoulou ("ctb"),
+Hugh Parsonage ("ctb"),
+Jakob Peder Pettersen (ctb")
 
 
 ## Introduction
