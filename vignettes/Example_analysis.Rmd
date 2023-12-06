@@ -1,0 +1,80 @@
+---
+title: "Example analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(matrixStats)
+library(tidyverse)
+```
+
+# 1B Customize the website
+
+# 1C: Example data:
+
+## what is the data
+
+The data that I chose for this project is about childcare costs from 2008-2018 from [National Database of Childcare Prices](https://www.dol.gov/agencies/wb/topics/featured-childcare). My goal is to understand how the childcare cost has changed during the years and how it varies across county. I will perform this analysis for different childcare provider type and children ages. Data dictionary can be found [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-05-09/readme.md).
+
+### Load in the data in R
+
+```{r}
+library(tidytuesdayR)
+#Check if the directory exist:
+if(!dir.exists("../../data")){
+ dir.create("../../data")
+ #only download data once:
+ if(!file.exists(c("../../data/childcare_costs.rda","../../data/counties.rda"))){
+ tuesdata <- tidytuesdayR::tt_load('2023-05-09')
+tuesdata <- tidytuesdayR::tt_load(2023, week = 19)
+
+childcare_costs <- tuesdata$childcare_costs
+counties <- tuesdata$counties
+ # save the files like this:
+ library(usethis)
+ use_data(childcare_costs)
+ use_data(counties)
+ }}
+```
+
+```{r}
+childcare_costs <- matrixStats::childcare_costs
+counties <- matrixStats::counties
+```
+
+## Data wrangling 
+First join the childcare costs with counties data
+
+```{r}
+childcare<-inner_join(childcare_costs,counties)
+```
+
+```{r}
+childcare_plot1<-childcare %>%
+  select(study_year, state_abbreviation, mc_infant, mc_toddler, mc_preschool, mfcc_infant, mfcc_toddler,
+         mfcc_preschool)
+
+childcare_plot1_long<- childcare_plot1 %>%
+  pivot_longer(!religion, names_to = "income", values_to = "count")
+```
+
+
+
+
+
+
+
+# Functions used:
+inner_join(), select()
+

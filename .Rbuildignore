@@ -55,3 +55,8 @@ scratch.R
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^matrixStats\.Rproj$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^vignettes/articles$
