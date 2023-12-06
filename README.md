@@ -1,8 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
 
 # matrixStats: Functions that Apply to Rows and Columns of Matrices (and to Vectors)
 
