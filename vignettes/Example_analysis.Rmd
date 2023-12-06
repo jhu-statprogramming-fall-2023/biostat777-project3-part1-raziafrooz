@@ -64,9 +64,6 @@ childcare<-inner_join(childcare_costs,counties)
 childcare_plot1<-childcare %>%
   select(study_year, state_abbreviation, mc_infant, mc_toddler, mc_preschool, mfcc_infant, mfcc_toddler,
          mfcc_preschool)
-
-childcare_plot1_long<- childcare_plot1 %>%
-  pivot_longer(!religion, names_to = "income", values_to = "count")
 ```
 
 
