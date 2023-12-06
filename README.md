@@ -26,7 +26,7 @@ website (excluding adding the example data analysis from Part 1C).
 
 6.  code_font: {google: "JetBrains Mono"}
 
-::: {#badges}
+
 <!-- pkgdown markup -->
 
 <a href="https://CRAN.R-project.org/web/checks/check_results_matrixStats.html"><img src="https://www.r-pkg.org/badges/version/matrixStats" alt="CRAN check status" border="0"/></a>
@@ -35,7 +35,7 @@ website (excluding adding the example data analysis from Part 1C).
 <a href="https://app.codecov.io/gh/HenrikBengtsson/matrixStats"><img src="https://codecov.io/gh/HenrikBengtsson/matrixStats/branch/develop/graph/badge.svg" alt="Coverage Status" border="0"/></a>
 <a href="https://github.com/rstats-gsoc/gsoc2015/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2015-blue" alt="A Google Summer of Code 2015 project" border="0"/></a>
 <a href="https://github.com/rstats-gsoc/gsoc2021/wiki/table-of-proposed-coding-projects"><img src="https://img.shields.io/badge/GSoC-2021-blue" alt="A Google Summer of Code 2021 project" border="0"/></a>
-:::
+
 
 ## Introduction
 
