@@ -31,6 +31,7 @@ website (excluding adding the example data analysis from Part 1C).
 6.  code_font: {google: "JetBrains Mono"}
 
 # Authors of the main package:
+Afrooz Razi (made website and example analysis)
 
 Henrik Bengtsson (aut", "cre", "cph"),
 Constantin Ahlmann-Eltze ("ctb"),
@@ -47,6 +48,52 @@ Angelina Panagopoulou ("ctb"),
 Hugh Parsonage ("ctb"),
 Jakob Peder Pettersen (ctb")
 
+## exported dunctions:
+
+### Location and scale estimators
+
+
+Weighted sample mean:	weightedMean(), colWeightedMeans(), rowWeightedMeans()	weightedMean(x, w)
+Mean	mean2(), colMeans2(), rowMeans2()	mean2(x)
+Median	median(), colMedians(), rowMedians()	median(x)
+Weighted median	weightedMedian(), colWeightedMedians(), rowWeightedMedians()	weightedMedian(x, w)
+Sample variance	var(), colVars(), rowVars()	var(x)
+Weighted sample variance	weightedVar(), colWeightedVars(), rowWeightedVars()	weightedVar(x, w), rowWeightedVars(x, w)
+Sample variance by n-order differences	varDiff(), colVarDiffs(), rowVarDiffs()	varDiff(x)
+Sample standard deviation	sd(), colSds(), rowSds()	sd(x)
+Weighted sample deviation	weightedSd(), colWeightedSds(), rowWeightedSds()	weightedSd(x, w), rowWeightedSds(x, w)
+Sample standard deviation by n-order differences	sdDiff(), colSdDiffs(), rowSdDiffs()	sdDiff(x)
+Median absolute deviation (MAD)	mad(), colMads(), rowMads()	mad(x)
+Weighted median absolute deviation (MAD)	weightedMad(), colWeightedMads(), rowWeightedMads()	weightedMad(x, w), rowWeightedMads(x, w)
+Median absolute deviation (MAD) by n-order differences	madDiff(), colMadDiffs(), rowMadDiffs()	madDiff(x)
+Quantile	quantile(), colQuantiles(), rowQuantiles()	quantile(x, probs)
+Interquartile range (IQR)	iqr(), colIQRs(), rowIQRs()	iqr(x)
+Interquartile range (IQR) by n-order differences	iqrDiff(), colIQRDiffs(), rowIQRDiffs()	iqrDiff(x)
+Range	range(), colRanges(), rowRanges()	range(x)
+Minimum	min(), colMins(), rowMins()	min(x)
+Maximum	max(), colMaxs(), rowMaxs()	max(x)
+
+### Testing for and counting values
+Are there any missing values?	anyMissing(), colAnyMissings(), rowAnyMissings()	anyMissing(x)
+Does TRUE exists?	any(), colAnys(), rowAnys()	any(x)
+Are all values TRUE?	all(), colAlls(), rowAlls()	all(x)
+Does value exists?	anyValue(), colAnys(), rowAnys()	anyValue(x, value)
+Do all elements have a given value?	allValue(), colAlls(), rowAlls()	allValue(x, value)
+Number of occurrences of a value?	count(), colCounts(), rowCounts()	count(x, value)
+
+### Cumulative functions
+Cumulative sum	cumsum(), colCumsums(), rowCumsums()	cumsum(x)
+Cumulative product	cumprod(), colCumprods(), rowCumprods()	cumprod(x)
+Cumulative minimum	cummin(), colCummins(), rowCummins()	cummin(x)
+Cumulative maximum	cummax(), colCummaxs(), rowCummaxs()	cummax(x)
+
+### Binning
+Counts in disjoint bins	binCounts()	
+Sample means (and counts) in disjoint bins	binMeans()
+
+### Miscellaneous
+Sum	sum2(), colSums2(), rowSums2()	sum2(x)
+Lagged differences	diff2(), colDiffs(), rowDiffs()
 
 ## Introduction
 
