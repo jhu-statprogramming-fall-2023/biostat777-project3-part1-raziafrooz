@@ -106,7 +106,7 @@ ggplot(plot2)+
   geom_col(aes(x=age, y=price, fill=age))+
   facet_wrap(vars(facility))+
   labs(title="Median childcare cost from 2013-2018 in Maryland based on age and facility",
-       subtitle = "Chilcare for infants are more expencive than other groups both in mc and mfcc\n(mc=center based, mfcc=family childcare)",
+       subtitle = "Chilcare for infants are more expencive than other groups\nboth in mc and mfcc (mc=center based, mfcc=family childcare)",
        caption = "Center based childcare is more expensive than family based childcare")
 
 ```
