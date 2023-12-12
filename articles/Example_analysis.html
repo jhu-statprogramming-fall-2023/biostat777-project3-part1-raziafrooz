@@ -9,9 +9,9 @@
 <title>Example analysis • matrixStats</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Kanit-0.4.7/font.css" rel="stylesheet">
-<link href="../deps/Ubuntu-0.4.7/font.css" rel="stylesheet">
-<link href="../deps/Dhurjati-0.4.7/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Kanit-0.4.8/font.css" rel="stylesheet">
+<link href="../deps/Ubuntu-0.4.8/font.css" rel="stylesheet">
+<link href="../deps/Dhurjati-0.4.8/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Example analysis">
@@ -85,46 +85,210 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/matrixStats" class="external-link">matrixStats</a></span><span class="op">)</span></span>
-<span><span class="co">#library(tidyverse)</span></span></code></pre></div>
-<!-- # 1B Customize the website -->
-<!-- # 1C: Example data: -->
-<!-- ## what is the data -->
-<!-- The data that I chose for this project is about childcare costs from 2008-2018 from [National Database of Childcare Prices](https://www.dol.gov/agencies/wb/topics/featured-childcare). My goal is to understand how the childcare cost has changed during the years and how it varies across county. I will perform this analysis for different childcare provider type and children ages. Data dictionary can be found [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-05-09/readme.md). -->
-<!-- ### Load in the data in R -->
-<!-- ```{r} -->
-<!-- library(tidytuesdayR) -->
-<!-- #Check if the directory exist: -->
-<!-- if(!dir.exists("../../data")){ -->
-<!--  dir.create("../../data") -->
-<!--  #only download data once: -->
-<!--  if(!file.exists(c("../../data/childcare_costs.rda","../../data/counties.rda"))){ -->
-<!--  tuesdata <- tidytuesdayR::tt_load('2023-05-09') -->
-<!-- tuesdata <- tidytuesdayR::tt_load(2023, week = 19) -->
-<!-- childcare_costs <- tuesdata$childcare_costs -->
-<!-- counties <- tuesdata$counties -->
-<!--  # save the files like this: -->
-<!--  library(usethis) -->
-<!--  use_data(childcare_costs) -->
-<!--  use_data(counties) -->
-<!--  }} -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- childcare_costs <- matrixStats::childcare_costs -->
-<!-- counties <- matrixStats::counties -->
-<!-- ``` -->
-<!-- ## Data wrangling -->
-<!-- First join the childcare costs with counties data -->
-<!-- ```{r} -->
-<!-- childcare<-inner_join(childcare_costs,counties) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- childcare_plot1<-childcare %>% -->
-<!--   select(study_year, state_abbreviation, mc_infant, mc_toddler, mc_preschool, mfcc_infant, mfcc_toddler, -->
-<!--          mfcc_preschool) -->
-<!-- ``` -->
-<!-- # Functions used: -->
-<!-- inner_join(), select() -->
-  </main>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org" class="external-link">usethis</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="b-customize-the-website">1B Customize the website<a class="anchor" aria-label="anchor" href="#b-customize-the-website"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="c-example-data">1C: Example data:<a class="anchor" aria-label="anchor" href="#c-example-data"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-is-the-data">what is the data<a class="anchor" aria-label="anchor" href="#what-is-the-data"></a>
+</h3>
+<p>The data that I chose for this project is about childcare costs from
+2008-2018 from <a href="https://www.dol.gov/agencies/wb/topics/featured-childcare" class="external-link">National
+Database of Childcare Prices</a>. My goal is to understand how the
+childcare cost in Maryland has changed during the years and how it
+varies across counties. I will perform this analysis for different
+childcare provider type and children ages. Data dictionary can be found
+<a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-05-09/readme.md" class="external-link">here</a>.</p>
+<div class="section level4">
+<h4 id="load-in-the-data-in-r">Load in the data in R<a class="anchor" aria-label="anchor" href="#load-in-the-data-in-r"></a>
+</h4>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Check if the directory exist:</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="st">"../data"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"../data"</span><span class="op">)</span></span>
+<span> <span class="co">#only download data once:</span></span>
+<span> <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"../data/childcare_costs.rda"</span>,<span class="st">"../data/counties.rda"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span> <span class="va">tuesdata</span> <span class="op">&lt;-</span> <span class="fu">tidytuesdayR</span><span class="fu">::</span><span class="fu">tt_load</span><span class="op">(</span><span class="st">'2023-05-09'</span><span class="op">)</span></span>
+<span><span class="va">tuesdata</span> <span class="op">&lt;-</span> <span class="fu">tidytuesdayR</span><span class="fu">::</span><span class="fu">tt_load</span><span class="op">(</span><span class="fl">2023</span>, week <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">childcare_costs</span> <span class="op">&lt;-</span> <span class="va">tuesdata</span><span class="op">$</span><span class="va">childcare_costs</span></span>
+<span><span class="va">counties</span> <span class="op">&lt;-</span> <span class="va">tuesdata</span><span class="op">$</span><span class="va">counties</span></span>
+<span> <span class="co"># save the files like this:</span></span>
+<span> <span class="fu"><a href="https://usethis.r-lib.org/reference/use_data.html" class="external-link">use_data</a></span><span class="op">(</span><span class="va">childcare_costs</span><span class="op">)</span></span>
+<span> <span class="fu"><a href="https://usethis.r-lib.org/reference/use_data.html" class="external-link">use_data</a></span><span class="op">(</span><span class="va">counties</span><span class="op">)</span></span>
+<span> <span class="op">}</span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"../data/childcare_costs.rda"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"../data/counties.rda"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="data-wrangling">Data wrangling<a class="anchor" aria-label="anchor" href="#data-wrangling"></a>
+</h3>
+<p>First join the childcare costs with county data Only select data for
+Maryland after removing the NA values</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">childcare</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">childcare_costs</span>,<span class="va">counties</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">state_abbreviation</span><span class="op">==</span><span class="st">"MD"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(county_fips_code)`</span></span></code></pre></div>
+<p>#1 which childcare provider is more expensive To answer this
+question, I will plot (geom_smooth) the cost of childcare during years
+colored by different facilities.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">childcare_plot1</span><span class="op">&lt;-</span><span class="va">childcare</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_year</span>,<span class="va">county_name</span>, <span class="va">mc_infant</span>, <span class="va">mc_toddler</span>, <span class="va">mc_preschool</span>, <span class="va">mfcc_infant</span>, <span class="va">mfcc_toddler</span>,<span class="va">mfcc_preschool</span><span class="op">)</span></span>
+<span>         </span>
+<span><span class="va">plot_long</span><span class="op">&lt;-</span><span class="va">childcare_plot1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">study_year</span>,<span class="va">county_name</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"facility"</span>, values_to <span class="op">=</span> <span class="st">"Median_cost"</span><span class="op">)</span></span></code></pre></div>
+<p>Plot 1:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot_long</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study_year</span>,y<span class="op">=</span><span class="va">Median_cost</span>, color<span class="op">=</span><span class="va">facility</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Aggregated weekly Childcare cost in MD based on facility type: 2013-2018"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Childcare cost has increased during the years for all facility types\n(mc=center based, mfcc=family childcare)"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"Center based childcare has had the most cost increase during the years"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre></div>
+<p><img src="Example_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672">
+## Using 2 fucntion form our package:</p>
+<div class="section level4">
+<h4 id="a">A<a class="anchor" aria-label="anchor" href="#a"></a>
+</h4>
+<p>In this section, I want to know the median childcare cost in years
+for each facility:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#how much is the average cost of each facility differ from each other </span></span>
+<span><span class="va">mtx</span><span class="op">&lt;-</span><span class="va">childcare_plot1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">study_year</span>,<span class="va">county_name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#find the median cost of each facility across years</span></span>
+<span><span class="va">col.med</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/rowMedians.html">colMedians</a></span><span class="op">(</span><span class="va">mtx</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot2</span><span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>facility<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">col.med</span><span class="op">)</span>, price<span class="op">=</span> <span class="va">col.med</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">separate</a></span><span class="op">(</span><span class="va">facility</span>,into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"facility"</span>, <span class="st">"age"</span><span class="op">)</span>,sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">age</span>, y<span class="op">=</span><span class="va">price</span>, fill<span class="op">=</span><span class="va">age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">facility</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Median childcare cost from 2013-2018 in Maryland based on age and facility"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Chilcare for infants are more expencive than other groups\nboth in mc and mfcc (mc=center based, mfcc=family childcare)"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"Center based childcare is more expensive than family based childcare"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Example_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+</div>
+<div class="section level4">
+<h4 id="b">B<a class="anchor" aria-label="anchor" href="#b"></a>
+</h4>
+<p>In this section, I would like to know the median childcare cost in
+each county in from 2013 to2018</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Find the median childcare cost in each year</span></span>
+<span><span class="va">row.med</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/rowMedians.html">rowMedians</a></span><span class="op">(</span><span class="va">mtx</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot3</span><span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>county<span class="op">=</span> <span class="va">childcare_plot1</span><span class="op">$</span><span class="va">county_name</span> , year<span class="op">=</span> <span class="va">childcare_plot1</span><span class="op">$</span><span class="va">study_year</span>, price<span class="op">=</span> <span class="va">row.med</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot3</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">price</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">county</span>, <span class="va">price</span><span class="op">)</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="st">"MD County"</span>, x<span class="op">=</span><span class="st">"Median childcare price"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Median weekly childcare price: 2013 to 2018 in each county in MD"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Montgomery county and Howard county have the highest weekly childcare cost"</span>,</span>
+<span>       caption<span class="op">=</span><span class="st">"Childcare cost for all ages"</span>,</span>
+<span>       color<span class="op">=</span><span class="st">"year"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Example_analysis_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="use-functions-from-purrr-package-to-learn-more-about-occupations-in-counties">Use functions from purrr package to learn more about occupations in
+counties<a class="anchor" aria-label="anchor" href="#use-functions-from-purrr-package-to-learn-more-about-occupations-in-counties"></a>
+</h3>
+<p>I only focused on management occupation as one of the highest payed
+jobs and wanted to see if there is a differenc between the percentage of
+males and females in management in any of the counties</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#What is the occupation of the parents?</span></span>
+<span><span class="va">childcare3</span><span class="op">&lt;-</span><span class="va">childcare</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">study_year</span><span class="op">&gt;=</span><span class="fl">2016</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_year</span>,<span class="va">county_name</span>, <span class="fl">39</span><span class="op">:</span><span class="fl">53</span><span class="op">)</span> </span>
+<span></span>
+<span></span>
+<span><span class="va">childcare3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">county_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Female_managment <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">femp_m</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         male_managment <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">memp_m</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">Female_managment</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   county_name [24]</span></span></span>
+<span><span class="co">#&gt;    county_name         data              Female_managment male_managment</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Howard County       <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             61.4           60.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Montgomery County   <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             57.1           55.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Frederick County    <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             50.1           43.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Anne Arundel County <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             49.9           44.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Carroll County      <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             48.3           39.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Calvert County      <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             48.1           34.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Charles County      <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             47.5           35.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Baltimore County    <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             47.5           39.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Queen Anne's County <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             47.1           37.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> St. Mary's County   <span style="color: #949494;">&lt;tibble [3 × 16]&gt;</span>             46.8           43.3</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span></code></pre></div>
+<p>Howard County has the highest percentage of male and female in
+management.Then Montgomery county and Fredrick county.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">childcare3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">study_year</span><span class="op">==</span><span class="fl">2018</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>managment <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_dbl</a></span><span class="op">(</span><span class="va">femp_m</span>,<span class="va">memp_m</span>,<span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">managment</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_year</span>,<span class="va">county_name</span>,<span class="va">managment</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 3</span></span></span>
+<span><span class="co">#&gt;    study_year county_name         managment</span></span>
+<span><span class="co">#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>       <span style="text-decoration: underline;">2</span>018 Howard County            61.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>       <span style="text-decoration: underline;">2</span>018 Montgomery County        57.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>       <span style="text-decoration: underline;">2</span>018 Anne Arundel County      50.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>       <span style="text-decoration: underline;">2</span>018 Frederick County         50.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>       <span style="text-decoration: underline;">2</span>018 Carroll County           49.0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>       <span style="text-decoration: underline;">2</span>018 Charles County           48.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>       <span style="text-decoration: underline;">2</span>018 Queen Anne's County      48.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>       <span style="text-decoration: underline;">2</span>018 Baltimore County         48  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       <span style="text-decoration: underline;">2</span>018 Calvert County           47.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       <span style="text-decoration: underline;">2</span>018 St. Mary's County        47.4</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span></code></pre></div>
+<p>Families might not be traditional (one man and women), so we can look
+at the average of these two for better analysis. On average the counties
+with highest percentage of individuals in management are Howard county,
+Montgomery County, and Anne Arundel County</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="conclusion">Conclusion:<a class="anchor" aria-label="anchor" href="#conclusion"></a>
+</h2>
+<p>In this analysis, I was able to look at the childcare costs in
+Maryland in years form 2013 to 2018 across different counties. Center
+based childcare for infants is the most expensive childcare type and age
+group across years and counties. Furthermore, Howard county and
+Montgomery county have the highest childcare cost and about 60% of
+parent work in management (fairely high pay job) which makes it more
+affordable.</p>
+</div>
+<div class="section level2">
+<h2 id="functions-used">Functions used:<a class="anchor" aria-label="anchor" href="#functions-used"></a>
+</h2>
+<p>inner_join(), select(), pivot_longer(), filter(), tifyr::drop_na(),
+separate(), mutate(), arrange()</p>
+<div class="section level4">
+<h4 id="ggplot-functions">ggplot functions<a class="anchor" aria-label="anchor" href="#ggplot-functions"></a>
+</h4>
+<p>geom_smooth(),geom_col(), geom_point()</p>
+</div>
+<div class="section level4">
+<h4 id="purrr-funcitons">purrr funcitons<a class="anchor" aria-label="anchor" href="#purrr-funcitons"></a>
+</h4>
+<p>map_dbl(),map2_dbl</p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
