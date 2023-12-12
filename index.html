@@ -87,7 +87,37 @@
 <div class="section level1">
 <h1 id="authors-of-the-main-package">Authors of the main package:<a class="anchor" aria-label="anchor" href="#authors-of-the-main-package"></a>
 </h1>
+<p>Afrooz Razi (made website and example analysis)</p>
 <p>Henrik Bengtsson (aut”, “cre”, “cph”), Constantin Ahlmann-Eltze (“ctb”), Hector Corrada Bravo (“ctb”), Robert Gentleman (“ctb”), Jan Gleixner (“ctb”), Peter Hickey (“ctb”), Ola Hossjer (“ctb”), Harris Jaffee (“ctb”), Dongcan Jiang (“ctb”), Peter Langfelder (“ctb”), Brian Montgomery (“ctb”), Angelina Panagopoulou (“ctb”), Hugh Parsonage (“ctb”), Jakob Peder Pettersen (ctb”)</p>
+<div class="section level2">
+<h2 id="exported-dunctions">exported dunctions:<a class="anchor" aria-label="anchor" href="#exported-dunctions"></a>
+</h2>
+<div class="section level3">
+<h3 id="location-and-scale-estimators">Location and scale estimators<a class="anchor" aria-label="anchor" href="#location-and-scale-estimators"></a>
+</h3>
+<p>Weighted sample mean: weightedMean(), colWeightedMeans(), rowWeightedMeans() weightedMean(x, w) Mean mean2(), colMeans2(), rowMeans2() mean2(x) Median median(), colMedians(), rowMedians() median(x) Weighted median weightedMedian(), colWeightedMedians(), rowWeightedMedians() weightedMedian(x, w) Sample variance var(), colVars(), rowVars() var(x) Weighted sample variance weightedVar(), colWeightedVars(), rowWeightedVars() weightedVar(x, w), rowWeightedVars(x, w) Sample variance by n-order differences varDiff(), colVarDiffs(), rowVarDiffs() varDiff(x) Sample standard deviation sd(), colSds(), rowSds() sd(x) Weighted sample deviation weightedSd(), colWeightedSds(), rowWeightedSds() weightedSd(x, w), rowWeightedSds(x, w) Sample standard deviation by n-order differences sdDiff(), colSdDiffs(), rowSdDiffs() sdDiff(x) Median absolute deviation (MAD) mad(), colMads(), rowMads() mad(x) Weighted median absolute deviation (MAD) weightedMad(), colWeightedMads(), rowWeightedMads() weightedMad(x, w), rowWeightedMads(x, w) Median absolute deviation (MAD) by n-order differences madDiff(), colMadDiffs(), rowMadDiffs() madDiff(x) Quantile quantile(), colQuantiles(), rowQuantiles() quantile(x, probs) Interquartile range (IQR) iqr(), colIQRs(), rowIQRs() iqr(x) Interquartile range (IQR) by n-order differences iqrDiff(), colIQRDiffs(), rowIQRDiffs() iqrDiff(x) Range range(), colRanges(), rowRanges() range(x) Minimum min(), colMins(), rowMins() min(x) Maximum max(), colMaxs(), rowMaxs() max(x)</p>
+</div>
+<div class="section level3">
+<h3 id="testing-for-and-counting-values">Testing for and counting values<a class="anchor" aria-label="anchor" href="#testing-for-and-counting-values"></a>
+</h3>
+<p>Are there any missing values? anyMissing(), colAnyMissings(), rowAnyMissings() anyMissing(x) Does TRUE exists? any(), colAnys(), rowAnys() any(x) Are all values TRUE? all(), colAlls(), rowAlls() all(x) Does value exists? anyValue(), colAnys(), rowAnys() anyValue(x, value) Do all elements have a given value? allValue(), colAlls(), rowAlls() allValue(x, value) Number of occurrences of a value? count(), colCounts(), rowCounts() count(x, value)</p>
+</div>
+<div class="section level3">
+<h3 id="cumulative-functions">Cumulative functions<a class="anchor" aria-label="anchor" href="#cumulative-functions"></a>
+</h3>
+<p>Cumulative sum cumsum(), colCumsums(), rowCumsums() cumsum(x) Cumulative product cumprod(), colCumprods(), rowCumprods() cumprod(x) Cumulative minimum cummin(), colCummins(), rowCummins() cummin(x) Cumulative maximum cummax(), colCummaxs(), rowCummaxs() cummax(x)</p>
+</div>
+<div class="section level3">
+<h3 id="binning">Binning<a class="anchor" aria-label="anchor" href="#binning"></a>
+</h3>
+<p>Counts in disjoint bins binCounts() Sample means (and counts) in disjoint bins binMeans()</p>
+</div>
+<div class="section level3">
+<h3 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a>
+</h3>
+<p>Sum sum2(), colSums2(), rowSums2() sum2(x) Lagged differences diff2(), colDiffs(), rowDiffs()</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
