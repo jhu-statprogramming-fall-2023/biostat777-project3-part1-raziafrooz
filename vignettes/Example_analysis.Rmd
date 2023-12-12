@@ -81,7 +81,7 @@ Plot 1:
 ```{r, warning=FALSE, error=FALSE,fig.width=7, fig.height=4}
 ggplot(plot_long)+
   geom_smooth(aes(x=study_year,y=Median_cost, color=facility))+
-  labs(title="Aggregated weekly Childcare cost in MD based on facility type: 2013-2018",
+  labs(title="Weekly Childcare cost in MD based on facility type: 2013-2018",
        subtitle = "Childcare cost has increased during the years for all facility types\n(mc=center based, mfcc=family childcare)",
        caption = "Center based childcare has had the most cost increase during the years")
 
@@ -103,7 +103,7 @@ plot2<- tibble(facility= names(col.med), price= col.med) %>%
 ggplot(plot2)+
   geom_col(aes(x=age, y=price, fill=age))+
   facet_wrap(vars(facility))+
-  labs(title="Median childcare cost from 2013-2018 in Maryland based on age and facility",
+  labs(title="Median childcare cost from 2013-2018 in Maryland based on\nage and facility",
        subtitle = "Chilcare for infants are more expencive than other groups\nboth in mc and mfcc (mc=center based, mfcc=family childcare)",
        caption = "Center based childcare is more expensive than family based childcare")
 
@@ -121,8 +121,8 @@ plot3<- tibble(county= childcare_plot1$county_name , year= childcare_plot1$study
 ggplot(plot3)+
   geom_point(aes(x=price, y=reorder(county, price), color=as.factor(year)))+
   labs(y="MD County", x="Median childcare price",
-       title = "Median weekly childcare price: 2013 to 2018 in each county in MD",
-       subtitle = "Montgomery county and Howard county have the highest weekly childcare cost",
+       title = "Median weekly childcare price from 2013 to 2018\nin each county in Maryland",
+       subtitle = "Montgomery county and Howard county have the highest\nweekly childcare cost",
        caption="Childcare cost for all ages",
        color="year")
 ```
